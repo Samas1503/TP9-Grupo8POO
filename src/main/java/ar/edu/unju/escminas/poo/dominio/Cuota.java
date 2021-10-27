@@ -5,22 +5,19 @@ import java.time.LocalDate;
 public class Cuota {
 	
 	//variables
-	float monto;
-	LocalDate vencimiento;
-	boolean pagado;
-	LocalDate diaPagado;
+	private float monto;
+	private LocalDate vencimiento;
+	private LocalDate diaPagado;
 	
 	//constructor
 	public Cuota() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Cuota(float monto, LocalDate vencimiento, boolean pagado, LocalDate diaPagado) {
+	public Cuota(float monto, LocalDate vencimiento) {
 		super();
 		this.monto = monto;
 		this.vencimiento = vencimiento;
-		this.pagado = pagado;
-		this.diaPagado = diaPagado;
 	}
 
 	//get and set
@@ -41,14 +38,6 @@ public class Cuota {
 		this.vencimiento = vencimiento;
 	}
 
-	public boolean isPagado() {
-		return pagado;
-	}
-
-	public void setPagado(boolean pagado) {
-		this.pagado = pagado;
-	}
-
 	public LocalDate getDiaPagado() {
 		return diaPagado;
 	}
@@ -62,8 +51,7 @@ public class Cuota {
 	public String toString() {
 		return "Cuota [monto=" + monto + 
 				", vencimiento=" + vencimiento + 
-				", pagado=" + pagado +
-				/*
+			    /*
 				", diaPagado=" + diaPagado +
 				*/ "]";
 	}

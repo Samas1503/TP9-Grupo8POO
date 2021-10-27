@@ -5,21 +5,21 @@ import java.util.Set;
 public abstract class Cliente {
 	
 	//variables
-	int idCliente;
-	static int ashei = 1;
-	String tipoCliente;
-	Set<Compra> compras;
+	private int idCliente;
+	private static int auto = 1;
+	private Set<Compra> compras;
+	private String tarjeta;
 	
 	//constructor
 	public Cliente() {
 		// TODO Auto-generated constructor stu
-		this.idCliente = ashei++;
+		this.idCliente = auto++;
 	}
-	public Cliente( String tipoCliente, Set<Compra> compras) {
+	public Cliente( Set<Compra> compras,String tarjeta) {
 		super();
-		this.idCliente = ashei++;
-		this.tipoCliente = tipoCliente;
+		this.idCliente = auto++;
 		this.compras = compras;
+		this.tarjeta = tarjeta;
 	}
 
 
@@ -30,28 +30,24 @@ public abstract class Cliente {
 	public void setIdCliente(int idCliente) {
 		this.idCliente = idCliente;
 	}
-	public String getTipoCliente() {
-		return tipoCliente;
-	}
-	public void setTipoCliente(String tipoCliente) {
-		this.tipoCliente = tipoCliente;
-	}
 	public Set<Compra> getCompras() {
 		return compras;
 	}
 	public void setCompras(Set<Compra> compras) {
 		this.compras = compras;
 	}
-	
+	public String getTarjeta() {
+		return tarjeta;
+	}
+	public void setTarjeta(String tarjeta) {
+		this.tarjeta = tarjeta;
+	}
 	//metodo toString
+	//no se mostraran las compras para evitar redundancia de datos
 	@Override
 	public String toString() {
-		return "Cliente [idCliente=" + idCliente + ", tipoCliente=" + tipoCliente + ", compras=" + compras + "]";
+		return "Cliente [idCliente=" + idCliente +",tarjeta="+ tarjeta +"]";
 	}
 	
-	public void agregarCompra(Compra compra) {
-		this.getCompras().add(compra);
-		
-	}
 	
 }
