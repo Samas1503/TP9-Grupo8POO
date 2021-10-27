@@ -5,23 +5,24 @@ import java.util.Set;
 public class Empresa extends Cliente{
 
 	//variables
-    String nombre;
-    String representante;
+    private String nombre;
+    private String representante;
     
     //constructores
     public Empresa() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Empresa(int idCliente, String tipoCliente, Set<Compra> compras, String nombre, String representante) {
-		super(tipoCliente, compras);
+	public Empresa(Set<Compra> compras, String tarjeta , String nombre, String representante) {
+		super( compras,tarjeta);
 		// TODO Auto-generated constructor stub
 		this.nombre = nombre;
 		this.representante = representante;
 	}
+	
 
 	//get and set
-	
+
 	public String getNombre() {
 		return nombre;
 	}
@@ -43,9 +44,8 @@ public class Empresa extends Cliente{
 	public String toString() {
 		return "Empresa [nombre=" + nombre + 
 				", representante=" + representante + 
-				", idCliente=" + this.getIdCliente() + 
-				", tipoCliente=" + this.getTipoCliente() + 
-				", compras=" + this.getCompras() +"]";
+				", idCliente=" + this.getIdCliente() +  
+				", tarjeta=" + this.getTarjeta() +"]";
 	}
 
 	

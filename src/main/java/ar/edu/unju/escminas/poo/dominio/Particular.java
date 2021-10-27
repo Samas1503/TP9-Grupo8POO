@@ -5,16 +5,16 @@ import java.util.Set;
 public class Particular extends Cliente{
 	
 	//variables
-	int dni;
-	String nombre;
-	String apellido;
+	private int dni;
+	private String nombre;
+	private String apellido;
 	
 	//constructores
 	public Particular() {
 		// TODO Auto-generated constructor stub
 	}
-	public Particular(int idCliente, String tipoCliente, Set<Compra> compras,int dni, String nombre, String apellido) {
-		super(tipoCliente, compras);
+	public Particular(String tarjeta, Set<Compra> compras,int dni, String nombre, String apellido) {
+		super(compras, tarjeta);
 		// TODO Auto-generated constructor stub
 		this.dni = dni;
 		this.nombre = nombre;
@@ -53,8 +53,7 @@ public class Particular extends Cliente{
 				", nombre=" + nombre + 
 				", apellido=" + apellido +
 				" ,idCliente=" + this.getIdCliente() + 
-				", tipoCliente=" + this.getTipoCliente() + 
-				", compras=" + this.getCompras() +"]";
+				", tarjeta=" + this.getTarjeta() +"]";
 	}
 	
 

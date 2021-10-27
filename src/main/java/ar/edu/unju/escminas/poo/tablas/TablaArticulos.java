@@ -30,11 +30,16 @@ public class TablaArticulos {
 	
 	public Articulo seleccionarArticuloId(int idArticulo) {
 		Articulo seleccionado = null;
-		for(Articulo a : this.getArticulos())
-		{
-			if(a.getIdArticulo() == idArticulo)
-				seleccionado = a;
-		}
+		do {
+			for(Articulo a : this.getArticulos())
+			{
+				if(a.getIdArticulo() == idArticulo)
+					seleccionado = a;
+			}
+			if(seleccionado == null)
+				System.out.println("no existe ese producto, intente de nuevo");
+		}while(seleccionado == null);
+		
 		return seleccionado;
 		
 	}

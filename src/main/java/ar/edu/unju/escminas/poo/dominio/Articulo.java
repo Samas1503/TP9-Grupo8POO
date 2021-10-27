@@ -2,25 +2,41 @@ package ar.edu.unju.escminas.poo.dominio;
 
 public class Articulo {
 	//variables
-	int idArticulo;
-	String nombre;
-	int stock;
-	String modelo;
-	float precio;
+	private int idArticulo;
+	private static int  auto = 1;
+	private String nombre;
+	private String modelo;
+	private float precio;
+	//producto almacenado
+	private int stock;
+	//producto comprado
+	private int cantidad;
 	
 	//constructor
 	public Articulo() {
 		// TODO Auto-generated constructor stub
+		this.idArticulo = auto++;
 	}
-
-	public Articulo(int idArticulo, String nombre, int stock, String modelo,float precio) {
+	
+	//constructor para producto almacenado
+	public Articulo(String nombre, int stock, String modelo,float precio) {
 		super();
-		this.idArticulo = idArticulo;
+		this.idArticulo = auto++;
 		this.nombre = nombre;
 		this.stock = stock;
 		this.modelo = modelo;
 		this.precio = precio;
 	}
+	
+	//constructor para producto almacenado
+		public Articulo(String nombre, String modelo,int cantidad,float precio) {
+			super();
+			this.idArticulo = auto++;
+			this.nombre = nombre;
+			this.cantidad = cantidad;
+			this.modelo = modelo;
+			this.precio = precio;
+		}
 	
 	//get and set
 	
@@ -63,7 +79,15 @@ public class Articulo {
 		this.precio = precio;
 	}
 	
-	//metodo toString
+	public int getCantidad() {
+		return cantidad;
+	}
+
+	public void setCantidad(int cantidad) {
+		this.cantidad = cantidad;
+	}
+	
+	//metodo toString para Articulo almacenado
 
 	@Override
 	public String toString() {
@@ -74,6 +98,13 @@ public class Articulo {
 				", precio=" + precio+ "]";
 	}
 	
-
+	//metodo toString para articulo comprado
+	
+	public String toString2() {
+		return "Articulo [idArticulo=" + idArticulo +
+				", nombre=" + nombre +
+				", cantidad=" + cantidad + 
+				", modelo=" + modelo+  "]";
+	}
 	
 }

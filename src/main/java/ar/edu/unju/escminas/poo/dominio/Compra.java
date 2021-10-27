@@ -4,19 +4,21 @@ import java.util.Set;
 
 public class Compra {
 	//variables
-	int idCompra;
-	Articulo articulo;
-	Set<Cuota> cuotas;
+	private int idCompra;
+	private static int auto = 1;
+	private Set<Articulo> articulos;
+	private Set<Cuota> cuotas;
 	
 	//constructor
 	public Compra() {
 		// TODO Auto-generated constructor stub
+		this.idCompra = auto++;
 	}
 	
-	public Compra(int idCompra, Articulo articulo, Set<Cuota> cuotas) {
+	public Compra( Set<Articulo> articulos, Set<Cuota> cuotas) {
 		super();
-		this.idCompra = idCompra;
-		this.articulo = articulo;
+		this.idCompra = auto++;
+		this.articulos = articulos;
 		this.cuotas = cuotas;
 	}
 
@@ -30,19 +32,19 @@ public class Compra {
 		this.idCompra = idCompra;
 	}
 
-	public Articulo getArticulo() {
-		return articulo;
+	public Set<Articulo> getArticulos() {
+		return articulos;
 	}
 
-	public void setArticulo(Articulo articulo) {
-		this.articulo = articulo;
+	public void setArticulos(Set<Articulo> articulos) {
+		this.articulos = articulos;
 	}
 
-	public Set<Cuota> getCompras() {
+	public Set<Cuota> getCuotas() {
 		return cuotas;
 	}
 
-	public void setCompras(Set<Cuota> cuotas) {
+	public void setCuotas(Set<Cuota> cuotas) {
 		this.cuotas = cuotas;
 	}
 
@@ -50,7 +52,8 @@ public class Compra {
 	
 	@Override
 	public String toString() {
-		return "Compra [idCompra=" + idCompra + ", articulo=" + articulo + ", compras=" + cuotas + "]";
+		return "Compra [idCompra=" + idCompra + 
+				", articulos=" + articulos + "]";
 	}
 	
 	
