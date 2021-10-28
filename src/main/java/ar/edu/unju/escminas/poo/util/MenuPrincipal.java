@@ -15,6 +15,15 @@ public class MenuPrincipal {
 			// TODO Auto-generated constructor stub
 		}
 		
+		public float deudaCompra(Compra compra) {
+			float deuda=0;
+			for(Cuota c : compra.getCuotas()) {
+				deuda = c.getMonto() *  compra.getCuotas().stream().filter(n -> n.getDiaPagado() == null).count();
+				break;
+			}
+			return deuda;
+		}
+		
 		public void menu (int opcion, TablaClientes tablaClientes,TablaArticulos tablaArticulos) {
 			ComprasUtil compraUtil = new ComprasUtil();
 			ArticulosUtil articuloUtil = new ArticulosUtil();
@@ -75,16 +84,11 @@ public class MenuPrincipal {
 						System.out.println("CUOTAS NO PAGADAS de la compra: "+ t);
 						t.getCuotas().stream().filter(n -> n.getDiaPagado() == null).forEach(System.out::println);
 						
-						//saco el monto de uno y lo multiplico 
-						for(Cuota c : t.getCuotas()) {
-							deuda += c.getMonto() *  t.getCuotas().stream().filter(n -> n.getDiaPagado() == null).count();
-							break;
-						}
-							
+						deuda += deudaCompra(t);
 						
 					}
-					System.out.println("Cantidad de deuda total: " + deuda);
-					
+					System.out.println("Cantidad de deuda total del cliente: " + deuda);
+					deuda = 0;
 				}
 				break;
 				
@@ -117,7 +121,23 @@ public class MenuPrincipal {
 				break;
 				
 			case 5:
-				System.out.println("hola ashei");
+				float deudaTotalEmpresa = 0;
+				for(Cliente x : tablaClientes.getClientes()) {
+					for (Compra v : x.getCompras()) {
+						deudaTotalEmpresa += deudaCompra(v);
+					}
+				}
+				System.out.println("la deuda total de todos los clientes hacia la empresa es de : " 
+				+ deudaTotalEmpresa);
+				break;
+			case 6: 
+				
+				break;
+			case 7:
+				System.out.println("hasta luego");
+				break;
+			default:
+				System.out.println("opcion no valida, intente de nuevo");
 				break;
 			}
 		}
