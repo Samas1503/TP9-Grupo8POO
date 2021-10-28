@@ -3,15 +3,15 @@ package ar.edu.unju.escminas.poo.dominio;
 import java.time.LocalDate;
 
 public class Cuota {
-	
-	//variables
+
+	// variables
 	private float monto;
 	private LocalDate vencimiento;
 	private LocalDate diaPagado;
-	
-	//constructor
+
+	// constructor
 	public Cuota() {
-		// TODO Auto-generated constructor stub
+
 	}
 
 	public Cuota(float monto, LocalDate vencimiento) {
@@ -20,8 +20,8 @@ public class Cuota {
 		this.vencimiento = vencimiento;
 	}
 
-	//get and set
-	
+	// get and set
+
 	public float getMonto() {
 		return monto;
 	}
@@ -46,17 +46,13 @@ public class Cuota {
 		this.diaPagado = diaPagado;
 	}
 
-	//metodo toString
+	// metodo toString
 	@Override
 	public String toString() {
-		return "Cuota [monto=" + monto + 
-				", vencimiento=" + vencimiento + 
-			    /*
-				", diaPagado=" + diaPagado +
-				*/ "]";
+		return "Cuota [monto=" + monto + ", vencimiento=" + vencimiento +
+		/*
+		 * ", diaPagado=" + diaPagado +
+		 */ "]";
 	}
-	
 
-	
-	
 }

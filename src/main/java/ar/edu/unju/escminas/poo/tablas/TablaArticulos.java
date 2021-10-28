@@ -6,9 +6,9 @@ import ar.edu.unju.escminas.poo.dominio.Articulo;
 
 public class TablaArticulos {
 	Set<Articulo> articulos;
-	
+
 	public TablaArticulos() {
-		// TODO Auto-generated constructor stub
+
 	}
 
 	public Set<Articulo> getArticulos() {
@@ -23,24 +23,23 @@ public class TablaArticulos {
 	public String toString() {
 		return "TablaArticulos [articulos=" + articulos + "]";
 	}
-	
+
 	public void listarArticulos() {
 		this.getArticulos().stream().forEach(System.out::println);
 	}
-	
+
 	public Articulo seleccionarArticuloId(int idArticulo) {
 		Articulo seleccionado = null;
 		do {
-			for(Articulo a : this.getArticulos())
-			{
-				if(a.getIdArticulo() == idArticulo)
+			for (Articulo a : this.getArticulos()) {
+				if (a.getIdArticulo() == idArticulo)
 					seleccionado = a;
 			}
-			if(seleccionado == null)
+			if (seleccionado == null)
 				System.out.println("no existe ese producto, intente de nuevo");
-		}while(seleccionado == null);
-		
+		} while (seleccionado == null);
+
 		return seleccionado;
-		
+
 	}
 }
