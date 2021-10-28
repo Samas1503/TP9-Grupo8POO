@@ -13,7 +13,7 @@ public class ArticulosUtil {
 
 	}
 
-	public Set<Articulo> seleccionarArticulos() {
+	public static Set<Articulo> seleccionarArticulos() {
 		Scanner sc = new Scanner(System.in);
 		TablaArticulos tablaArticulos = new TablaArticulos();
 		Set<Articulo> lista = new HashSet<>();
@@ -29,14 +29,14 @@ public class ArticulosUtil {
 			System.out.println("que cantidad de este articulo desea?");
 			// try - catch
 			cantidad = sc.nextInt();
-			if (cantidad > encontrado.getStock())
+			if (cantidad > encontrado.getCantidad())
 				System.out.println("no hay suficiente stock");
 			else {
 				Articulo comprado = new Articulo(encontrado.getNombre(), encontrado.getModelo(), cantidad,
 						encontrado.getPrecio());
 				lista.add(comprado);
 				// actualizar el stock
-				encontrado.setStock(encontrado.getStock() - comprado.getCantidad());
+				encontrado.setCantidad(encontrado.getCantidad() - comprado.getCantidad());
 			}
 
 			System.out.println("desea agregar otro articulo?");
@@ -47,10 +47,10 @@ public class ArticulosUtil {
 		return lista;
 	}
 
-	public boolean verificarArticuloSeleccionado(Articulo articulo) {
+	public static boolean verificarArticuloSeleccionado(Articulo articulo) {
 		if (articulo.getNombre() == "heladera" || articulo.getNombre() == "lavarropa"
 				|| articulo.getNombre() == "cocina" || articulo.getNombre() == "termotanque"
-				|| articulo.getNombre() == "lavavagillas" || articulo.getNombre() == "ventiladores")
+				|| articulo.getNombre() == "lavavagillas" || articulo.getNombre() == "ventilador")
 			return true;
 		else
 			return false;

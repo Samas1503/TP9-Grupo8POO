@@ -7,9 +7,6 @@ public class Articulo {
 	private String nombre;
 	private String modelo;
 	private float precio;
-	// producto almacenado
-	private int stock;
-	// producto comprado
 	private int cantidad;
 
 	// constructor
@@ -23,7 +20,6 @@ public class Articulo {
 		super();
 		this.idArticulo = auto++;
 		this.nombre = nombre;
-		this.stock = stock;
 		this.modelo = modelo;
 		this.precio = precio;
 	}
@@ -56,14 +52,6 @@ public class Articulo {
 		this.nombre = nombre;
 	}
 
-	public int getStock() {
-		return stock;
-	}
-
-	public void setStock(int stock) {
-		this.stock = stock;
-	}
-
 	public String getModelo() {
 		return modelo;
 	}
@@ -88,19 +76,11 @@ public class Articulo {
 		this.cantidad = cantidad;
 	}
 
-	// metodo toString para Articulo almacenado
-
-	@Override
-	public String toString() {
-		return "Articulo [idArticulo=" + idArticulo + ", nombre=" + nombre + ", stock=" + stock + ", modelo=" + modelo
-				+ ", precio=" + precio + "]";
-	}
-
 	// metodo toString para articulo comprado
 
-	public String toString2() {
-		return "Articulo [idArticulo=" + idArticulo + ", nombre=" + nombre + ", cantidad=" + cantidad + ", modelo="
-				+ modelo + "]";
+	public String toString() {
+		return "Articulo [idArticulo=" + idArticulo + ", nombre=" + nombre + ", cantidad=" + cantidad + ", precio="
+				+ precio + ", modelo=" + modelo + "]";
 	}
 
 }
