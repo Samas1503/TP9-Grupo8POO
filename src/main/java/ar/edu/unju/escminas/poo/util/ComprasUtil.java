@@ -19,11 +19,9 @@ public class ComprasUtil {
 
 	}
 
-	public Compra hacerCompra(Cliente cliente, Set<Articulo> articulos) {
+	public static Compra hacerCompra(Cliente cliente, Set<Articulo> articulos) {
 
-		ArticulosUtil articuloUtil = new ArticulosUtil();
 		Compra nuevaCompra = new Compra();
-
 		LocalDate hoy = LocalDate.now();
 		LocalDate vencimiento = LocalDate.of(hoy.getYear(), hoy.getMonthValue(), 15);
 		float precioTotal = 0;
@@ -31,10 +29,11 @@ public class ComprasUtil {
 
 		for (Articulo k : articulos) {
 			// verifico que sea un articulo seleccionado
-			if (articuloUtil.verificarArticuloSeleccionado(k))
+			if (ArticulosUtil.verificarArticuloSeleccionado(k)) {
 				// saco el precio total a pagar
 				precioTotal += k.getPrecio() * k.getCantidad();
-			else
+				nuevaCompra.getArticulos().add(k);
+			} else
 				System.out.println("el articulo siguiente articulo debera pagarse al contado: " + k);
 		}
 
@@ -65,12 +64,12 @@ public class ComprasUtil {
 			cuotas.add(nuevaCuota);
 		}
 		nuevaCompra.setCuotas(cuotas);
-
 		return nuevaCompra;
 
 	}
 
-	public Compra seleccionarCompra(Cliente cliente) {
+	public static Compra seleccionarCompra(Cliente cliente) {
+		Scanner sc = new Scanner(System.in);
 		Compra encontrada = null;
 		int idCompra;
 
@@ -90,7 +89,7 @@ public class ComprasUtil {
 		return encontrada;
 	}
 
-	public void pagarCuota(Compra compra) {
+	public static void pagarCuota(Compra compra) {
 		for (Cuota pagar : compra.getCuotas()) {
 			if (pagar.getDiaPagado() == null) {
 				pagar.setDiaPagado(LocalDate.now());

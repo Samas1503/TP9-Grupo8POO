@@ -22,8 +22,6 @@ public class MenuPrincipal {
 	}
 
 	public void menu(int opcion, TablaClientes tablaClientes, TablaArticulos tablaArticulos) {
-		ComprasUtil compraUtil = new ComprasUtil();
-		ArticulosUtil articuloUtil = new ArticulosUtil();
 		Scanner sc = new Scanner(System.in);
 		Cliente cliente = null;
 
@@ -60,7 +58,7 @@ public class MenuPrincipal {
 			if (cliente.getTarjeta() == "Banco1" || cliente.getTarjeta() == "Banco2"
 					|| cliente.getTarjeta() == "Banco3") {
 
-				cliente.getCompras().add(compraUtil.hacerCompra(cliente, articuloUtil.seleccionarArticulos()));
+				cliente.getCompras().add(ComprasUtil.hacerCompra(cliente, ArticulosUtil.seleccionarArticulos()));
 
 				System.out.println("la compra fue realizada con exito");
 			} else
@@ -94,8 +92,8 @@ public class MenuPrincipal {
 			System.out.println("el cliente tiene las siguientes compras: ");
 			cliente.getCompras().stream().forEach(System.out::println);
 
-			Compra compraEncontrada = compraUtil.seleccionarCompra(cliente);
-			compraUtil.pagarCuota(compraEncontrada);
+			Compra compraEncontrada = ComprasUtil.seleccionarCompra(cliente);
+			ComprasUtil.pagarCuota(compraEncontrada);
 
 			System.out.println("la cuota fue pagada");
 			break;

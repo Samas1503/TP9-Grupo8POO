@@ -1,5 +1,6 @@
 package ar.edu.unju.escminas.poo.dominio;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class Compra {
@@ -11,7 +12,7 @@ public class Compra {
 
 	// constructor
 	public Compra() {
-
+		this.articulos = new HashSet<Articulo>();
 		this.idCompra = auto++;
 	}
 
