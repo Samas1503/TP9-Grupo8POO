@@ -2,26 +2,27 @@ package ar.edu.unju.escminas.poo.dominio;
 
 import java.util.Set;
 
-public class Particular extends Cliente{
-	
-	//variables
+public class Particular extends Cliente {
+
+	// variables
 	private int dni;
 	private String nombre;
 	private String apellido;
-	
-	//constructores
+
+	// constructores
 	public Particular() {
-		// TODO Auto-generated constructor stub
+
 	}
-	public Particular(String tarjeta, Set<Compra> compras,int dni, String nombre, String apellido) {
+
+	public Particular(String tarjeta, Set<Compra> compras, int dni, String nombre, String apellido) {
 		super(compras, tarjeta);
-		// TODO Auto-generated constructor stub
+
 		this.dni = dni;
 		this.nombre = nombre;
 		this.apellido = apellido;
 	}
-	
-	//get and set
+
+	// get and set
 
 	public int getDni() {
 		return dni;
@@ -49,13 +50,8 @@ public class Particular extends Cliente{
 
 	@Override
 	public String toString() {
-		return "Particular [dni=" + dni + 
-				", nombre=" + nombre + 
-				", apellido=" + apellido +
-				" ,idCliente=" + this.getIdCliente() + 
-				", tarjeta=" + this.getTarjeta() +"]";
+		return "Particular [dni=" + dni + ", nombre=" + nombre + ", apellido=" + apellido + " ,idCliente="
+				+ this.getIdCliente() + ", tarjeta=" + this.getTarjeta() + "]";
 	}
-	
 
-	
 }

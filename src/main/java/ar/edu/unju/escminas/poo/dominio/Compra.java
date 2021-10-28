@@ -3,27 +3,27 @@ package ar.edu.unju.escminas.poo.dominio;
 import java.util.Set;
 
 public class Compra {
-	//variables
+	// variables
 	private int idCompra;
 	private static int auto = 1;
 	private Set<Articulo> articulos;
 	private Set<Cuota> cuotas;
-	
-	//constructor
+
+	// constructor
 	public Compra() {
-		// TODO Auto-generated constructor stub
+
 		this.idCompra = auto++;
 	}
-	
-	public Compra( Set<Articulo> articulos, Set<Cuota> cuotas) {
+
+	public Compra(Set<Articulo> articulos, Set<Cuota> cuotas) {
 		super();
 		this.idCompra = auto++;
 		this.articulos = articulos;
 		this.cuotas = cuotas;
 	}
 
-	//get and set
-	
+	// get and set
+
 	public int getIdCompra() {
 		return idCompra;
 	}
@@ -48,15 +48,11 @@ public class Compra {
 		this.cuotas = cuotas;
 	}
 
-	//metodo toString
-	
+	// metodo toString
+
 	@Override
 	public String toString() {
-		return "Compra [idCompra=" + idCompra + 
-				", articulos=" + articulos + "]";
+		return "Compra [idCompra=" + idCompra + ", articulos=" + articulos + "]";
 	}
-	
-	
-	
-	
+
 }
