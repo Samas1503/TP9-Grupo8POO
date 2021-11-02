@@ -23,6 +23,7 @@ public class MenuPrincipal {
 
 	public void menu(int opcion, TablaClientes tablaClientes, TablaArticulos tablaArticulos) {
 		Scanner sc = new Scanner(System.in);
+		boolean pagado = true;
 		Cliente cliente = null;
 
 		System.out.println("******MENU********");
@@ -93,9 +94,11 @@ public class MenuPrincipal {
 			cliente.getCompras().stream().forEach(System.out::println);
 
 			Compra compraEncontrada = ComprasUtil.seleccionarCompra(cliente);
-			ComprasUtil.pagarCuota(compraEncontrada);
-
-			System.out.println("la cuota fue pagada");
+			pagado = ComprasUtil.pagarCuota(compraEncontrada);
+			if (pagado)
+				System.out.println("la cuota fue pagada");
+			else
+				System.out.println("la compa ya fue pagada en su totalidad");
 			break;
 
 		case 4:
@@ -121,6 +124,21 @@ public class MenuPrincipal {
 			System.out.println("la deuda total de todos los clientes hacia la empresa es de : " + deudaTotalEmpresa);
 			break;
 		case 6:
+			Cliente favorito = null;
+			float deudaCliente = 0, deudaMinima = 1000000000;
+			for (Cliente c : tablaClientes.getClientes()) {
+				for (Compra p : c.getCompras()) {
+					deudaCliente += deudaCompra(p);
+				}
+				if (deudaCliente < deudaMinima) {
+					deudaMinima = deudaCliente;
+					favorito = c;
+				}
+				deudaCliente = 0;
+			}
+
+			System.out.println("el cliente con menos deuda es: " + favorito);
+			System.out.println("con una deuda de: " + deudaMinima);
 
 			break;
 		case 7:

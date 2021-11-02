@@ -19,14 +19,7 @@ public class ComprasUtil {
 
 	}
 
-	public static Compra hacerCompra(Cliente cliente, Set<Articulo> articulos) {
-
-		Compra nuevaCompra = new Compra();
-		LocalDate hoy = LocalDate.now();
-		LocalDate vencimiento = LocalDate.of(hoy.getYear(), hoy.getMonthValue(), 15);
-		float precioTotal = 0;
-		int n;
-
+	public void filtrarArticulos(Compra nuevaCompra, Set<Articulo> articulos, float precioTotal) {
 		for (Articulo k : articulos) {
 			// verifico que sea un articulo seleccionado
 			if (ArticulosUtil.verificarArticuloSeleccionado(k)) {
@@ -36,17 +29,38 @@ public class ComprasUtil {
 			} else
 				System.out.println("el articulo siguiente articulo debera pagarse al contado: " + k);
 		}
+	}
 
+	// hacer test
+	public static int determinarCuotas(Cliente cliente) {
+		int n;
 		// asigno un plan correspondiente
 		if (cliente instanceof Particular) {
 			// cantidad de cuotas
 			n = 24;
+		} else {
+			// cantidad de cuotas
+			n = 12;
+		}
+		return n;
+	}
+
+	// hacer test
+	public static float calcularPrecioTotal(Set<Articulo> articulos) {
+		float precio = 0;
+		for (Articulo a : articulos) {
+			precio += a.getPrecio();
+		}
+		return precio;
+	}
+
+	public static float calcularPrecioTotalCredito(Cliente cliente, float precioTotal) {
+		// asigno un plan correspondiente
+		if (cliente instanceof Particular) {
 			// si el precio supera los 200.000 se le suma un 40% de interez
 			if (precioTotal > 200000.00)
 				precioTotal += precioTotal * 0.4;
 		} else {
-			// cantidad de cuotas
-			n = 12;
 			// si el precio supera los 500.000 se le suma un 40% de interez
 			if (precioTotal > 500000.00)
 				precioTotal += precioTotal * 0.4;
@@ -54,18 +68,48 @@ public class ComprasUtil {
 			else
 				precioTotal += precioTotal * 0.2;
 		}
+		return precioTotal;
+	}
 
-		// creacion de las cuotas
+	public static Cuota generarCuota(float monto, LocalDate fecha) {
+		Cuota cuota = new Cuota(monto, fecha);
+		return cuota;
+	}
 
-		Set<Cuota> cuotas = new HashSet<>();
-
+	// hacer test
+	public static Set<Cuota> agregarCuotas(Set<Cuota> cuotas, float precioTotal, LocalDate vencimiento, int n) {
 		for (int i = 1; i <= n; i++) {
-			Cuota nuevaCuota = new Cuota(precioTotal / n, vencimiento.plusMonths(i));
+			Cuota nuevaCuota = generarCuota(precioTotal / n, vencimiento.plusMonths(i));
 			cuotas.add(nuevaCuota);
 		}
+		return cuotas;
+	}
+
+	public static Compra hacerCompra(Cliente cliente, Set<Articulo> articulos) {
+
+		Compra nuevaCompra = new Compra();
+		LocalDate hoy = LocalDate.now();
+		LocalDate vencimiento = LocalDate.of(hoy.getYear(), hoy.getMonthValue(), 15);
+		float precioTotal = 0;
+		int n = 0;
+
+		// e
+
+		// determina las cuotas del cliente
+		n = determinarCuotas(cliente);
+
+		// determinar precio total
+		precioTotal = calcularPrecioTotal(articulos);
+
+		// determina el precio verdadero
+		precioTotal = calcularPrecioTotalCredito(cliente, precioTotal);
+
+		// creacion de las cuotas
+		Set<Cuota> cuotas = new HashSet<>();
+		cuotas = agregarCuotas(cuotas, precioTotal, vencimiento, n);
+
 		nuevaCompra.setCuotas(cuotas);
 		return nuevaCompra;
-
 	}
 
 	public static Compra seleccionarCompra(Cliente cliente) {
@@ -89,12 +133,15 @@ public class ComprasUtil {
 		return encontrada;
 	}
 
-	public static void pagarCuota(Compra compra) {
+	public static boolean pagarCuota(Compra compra) {
+		boolean pagado = false;
 		for (Cuota pagar : compra.getCuotas()) {
 			if (pagar.getDiaPagado() == null) {
 				pagar.setDiaPagado(LocalDate.now());
+				pagado = true;
 				break;
 			}
 		}
+		return pagado;
 	}
 }

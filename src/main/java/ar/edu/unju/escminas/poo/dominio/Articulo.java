@@ -15,16 +15,6 @@ public class Articulo {
 		this.idArticulo = auto++;
 	}
 
-	// constructor para producto almacenado
-	public Articulo(String nombre, int stock, String modelo, float precio) {
-		super();
-		this.idArticulo = auto++;
-		this.nombre = nombre;
-		this.modelo = modelo;
-		this.precio = precio;
-	}
-
-	// constructor para producto almacenado
 	public Articulo(String nombre, String modelo, int cantidad, float precio) {
 		super();
 		this.idArticulo = auto++;
