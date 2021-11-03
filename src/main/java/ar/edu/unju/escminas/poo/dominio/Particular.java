@@ -1,8 +1,9 @@
 package ar.edu.unju.escminas.poo.dominio;
 
+import java.util.HashSet;
 import java.util.Set;
 
-public class Particular extends Cliente {
+public class Particular extends Cliente{
 
 	// variables
 	private int dni;
@@ -11,12 +12,10 @@ public class Particular extends Cliente {
 
 	// constructores
 	public Particular() {
-
 	}
 
-	public Particular(String tarjeta, Set<Compra> compras, int dni, String nombre, String apellido) {
-		super(compras, tarjeta);
-
+	public Particular(String tarjeta, int dni, String nombre, String apellido) {
+		super(tarjeta);
 		this.dni = dni;
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -50,8 +49,12 @@ public class Particular extends Cliente {
 
 	@Override
 	public String toString() {
-		return "Particular [dni=" + dni + ", nombre=" + nombre + ", apellido=" + apellido + " ,idCliente="
-				+ this.getIdCliente() + ", tarjeta=" + this.getTarjeta() + "]";
+		return "Particular [idCliente=" + this.getIdCliente() +
+				", nombre=" + nombre +
+				", apellido=" + apellido +
+				" ,dni=" + dni +
+				", tarjeta=" + this.getTarjeta() + "]";
 	}
+
 
 }

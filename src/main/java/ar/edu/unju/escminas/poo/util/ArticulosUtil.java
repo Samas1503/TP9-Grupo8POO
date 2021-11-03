@@ -13,36 +13,52 @@ public class ArticulosUtil {
 
 	}
 
-	public static Set<Articulo> seleccionarArticulos() {
+	public static Set<Articulo> seleccionarArticulos(TablaArticulos tablaArticulos) {
 		Scanner sc = new Scanner(System.in);
-		TablaArticulos tablaArticulos = new TablaArticulos();
-		Set<Articulo> lista = new HashSet<>();
+		Set<Articulo> lista = null;
 		String respuesta;
 		int cantidad;
-		Articulo encontrado;
+		Articulo encontrado = null;
 
 		do {
+	
+			encontrado = tablaArticulos.seleccionarArticuloId();
+			
+			if(encontrado != null)
+			{
+				
+				
+				System.out.println("que cantidad de este articulo desea?");
+				try {
+					cantidad = sc.nextInt();
+				} catch (Exception e) {
+					System.out.println("ingrese valores numericos");
+					cantidad = 0;
+				}
+				
+				if (cantidad > encontrado.getCantidad())
+					System.out.println("no hay suficiente stock");
+				else {
+					lista = new HashSet<>();
+					Articulo comprado = new Articulo(encontrado.getNombre(), encontrado.getModelo(), 
+							cantidad,encontrado.getPrecio());
+					lista.add(comprado);
+					// actualizar el stock
+					encontrado.setCantidad(encontrado.getCantidad() - comprado.getCantidad());
+				}
 
-			System.out.println("elija un articulo segun su id");
-			encontrado = tablaArticulos.seleccionarArticuloId(sc.nextInt());
-
-			System.out.println("que cantidad de este articulo desea?");
-			// try - catch
-			cantidad = sc.nextInt();
-			if (cantidad > encontrado.getCantidad())
-				System.out.println("no hay suficiente stock");
-			else {
-				Articulo comprado = new Articulo(encontrado.getNombre(), encontrado.getModelo(), cantidad,
-						encontrado.getPrecio());
-				lista.add(comprado);
-				// actualizar el stock
-				encontrado.setCantidad(encontrado.getCantidad() - comprado.getCantidad());
 			}
 
-			System.out.println("desea agregar otro articulo?");
-			// try-catch
-			respuesta = sc.next();
-		} while (respuesta != "no" || respuesta != "NO");
+			
+			System.out.println("desea agregar otro articulo? si/no");
+			try {
+				respuesta = sc.next();
+			} catch (Exception e) {
+				System.out.println("ocurrio un error, se tomara como que no quiere agreagar otro producto");
+				respuesta = "no";
+			}
+			
+		} while (respuesta.equals("si"));
 
 		return lista;
 	}

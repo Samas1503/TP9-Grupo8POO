@@ -1,5 +1,6 @@
 package ar.edu.unju.escminas.poo.tablas;
 
+import java.util.Scanner;
 import java.util.Set;
 
 import ar.edu.unju.escminas.poo.dominio.Articulo;
@@ -28,16 +29,25 @@ public class TablaArticulos {
 		this.getArticulos().stream().forEach(System.out::println);
 	}
 
-	public Articulo seleccionarArticuloId(int idArticulo) {
+	public Articulo seleccionarArticuloId() {
 		Articulo seleccionado = null;
-		do {
-			for (Articulo a : this.getArticulos()) {
+		Scanner sc = new Scanner(System.in);
+		int idArticulo = 0;
+		
+			
+			System.out.println("elija un articulo segun su id");
+			try {
+				idArticulo = sc.nextInt();
+			} catch (Exception e) {
+				System.out.println("ingrese valores numericos");
+			}	
+	
+			for (Articulo a : this.getArticulos()) {				
 				if (a.getIdArticulo() == idArticulo)
 					seleccionado = a;
 			}
 			if (seleccionado == null)
 				System.out.println("no existe ese producto, intente de nuevo");
-		} while (seleccionado == null);
 
 		return seleccionado;
 

@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import ar.edu.unju.escminas.poo.dominio.Articulo;
 import ar.edu.unju.escminas.poo.dominio.Cliente;
@@ -32,20 +34,6 @@ public class ComprasUtil {
 	}
 
 	// hacer test
-	public static int determinarCuotas(Cliente cliente) {
-		int n;
-		// asigno un plan correspondiente
-		if (cliente instanceof Particular) {
-			// cantidad de cuotas
-			n = 24;
-		} else {
-			// cantidad de cuotas
-			n = 12;
-		}
-		return n;
-	}
-
-	// hacer test
 	public static float calcularPrecioTotal(Set<Articulo> articulos) {
 		float precio = 0;
 		for (Articulo a : articulos) {
@@ -71,15 +59,23 @@ public class ComprasUtil {
 		return precioTotal;
 	}
 
-	public static Cuota generarCuota(float monto, LocalDate fecha) {
-		Cuota cuota = new Cuota(monto, fecha);
-		return cuota;
-	}
 
 	// hacer test
-	public static Set<Cuota> agregarCuotas(Set<Cuota> cuotas, float precioTotal, LocalDate vencimiento, int n) {
+	public static Set<Cuota> agregarCuotas(Set<Cuota> cuotas, float precioTotal, Cliente cliente) {
+		LocalDate hoy = LocalDate.now();
+		LocalDate vencimiento = LocalDate.of(hoy.getYear(), hoy.getMonthValue(), 15);
+		int n;
+		// determina las cuotas del cliente
+				if (cliente instanceof Particular) {
+					// cantidad de cuotas
+					n = 24;
+				} else {
+					// cantidad de cuotas
+					n = 12;
+				};
+		
 		for (int i = 1; i <= n; i++) {
-			Cuota nuevaCuota = generarCuota(precioTotal / n, vencimiento.plusMonths(i));
+			Cuota nuevaCuota = new Cuota (precioTotal/n,vencimiento.plusMonths(i));
 			cuotas.add(nuevaCuota);
 		}
 		return cuotas;
@@ -88,15 +84,7 @@ public class ComprasUtil {
 	public static Compra hacerCompra(Cliente cliente, Set<Articulo> articulos) {
 
 		Compra nuevaCompra = new Compra();
-		LocalDate hoy = LocalDate.now();
-		LocalDate vencimiento = LocalDate.of(hoy.getYear(), hoy.getMonthValue(), 15);
 		float precioTotal = 0;
-		int n = 0;
-
-		// e
-
-		// determina las cuotas del cliente
-		n = determinarCuotas(cliente);
 
 		// determinar precio total
 		precioTotal = calcularPrecioTotal(articulos);
@@ -105,8 +93,8 @@ public class ComprasUtil {
 		precioTotal = calcularPrecioTotalCredito(cliente, precioTotal);
 
 		// creacion de las cuotas
-		Set<Cuota> cuotas = new HashSet<>();
-		cuotas = agregarCuotas(cuotas, precioTotal, vencimiento, n);
+		Set<Cuota> cuotas = new TreeSet<Cuota>();
+		cuotas = agregarCuotas(cuotas, precioTotal,cliente);
 
 		nuevaCompra.setCuotas(cuotas);
 		return nuevaCompra;
@@ -118,9 +106,9 @@ public class ComprasUtil {
 		int idCompra;
 
 		System.out.println("elija una compra mediante su idCompra");
-		// try catch
 
 		do {
+			//try catch
 			idCompra = sc.nextInt();
 			for (Compra c : cliente.getCompras()) {
 				if (c.getIdCompra() == idCompra)

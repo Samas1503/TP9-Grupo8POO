@@ -1,7 +1,9 @@
 package ar.edu.unju.escminas.poo.util;
 
 import java.util.Scanner;
+import java.util.Set;
 
+import ar.edu.unju.escminas.poo.dominio.Articulo;
 import ar.edu.unju.escminas.poo.dominio.Cliente;
 import ar.edu.unju.escminas.poo.dominio.Compra;
 import ar.edu.unju.escminas.poo.dominio.Cuota;
@@ -25,10 +27,11 @@ public class MenuPrincipal {
 		Scanner sc = new Scanner(System.in);
 		boolean pagado = true;
 		Cliente cliente = null;
+		Set<Articulo> articulos = null;
 
 		System.out.println("******MENU********");
 		System.out.println("1. crear y agregar al sistema una compra ");
-		System.out.println("2. listar clientes m�s cuotas pagadas, cuotas por pagar, monto por pagar ");
+		System.out.println("2. listar clientes mas cuotas pagadas, cuotas por pagar, monto por pagar ");
 		System.out.println("3. registrar el pago de las cuotas");
 		System.out.println("4. cuotas no pagadas de un cliente particular");
 		System.out.println("5. dinero por cobrar");
@@ -50,20 +53,35 @@ public class MenuPrincipal {
 		case 1:
 			tablaClientes.listarClientes();
 			System.out.println("elija un cliente a travez de su id");
-			// try catch
-			cliente = tablaClientes.seleccionarClienteId(sc.nextInt());
-
+			
+			try {
+				cliente = tablaClientes.seleccionarClienteId(sc.nextInt());
+			} catch (Exception e) {
+				System.out.println("ocurrio un error, intente de nuevo");
+				break;
+			}
+			
+			
 			tablaArticulos.listarArticulos();
-
-			// verifico tarjeta de banco correcto
-			if (cliente.getTarjeta() == "Banco1" || cliente.getTarjeta() == "Banco2"
-					|| cliente.getTarjeta() == "Banco3") {
-
-				cliente.getCompras().add(ComprasUtil.hacerCompra(cliente, ArticulosUtil.seleccionarArticulos()));
-
-				System.out.println("la compra fue realizada con exito");
-			} else
-				System.out.println("el cliente seleccionado no posee una tarjeta valida. Pague al contado");
+			try {
+				articulos = ArticulosUtil.seleccionarArticulos(tablaArticulos);
+			} catch (Exception e) {
+				System.out.println("ocurrio un error, intente de nuevo");
+				break;
+			}
+			
+			if(articulos == null) {
+				System.out.println("no realizo ninguna compra");
+			}else {
+				// verifico tarjeta de banco correcto
+				if (cliente.getTarjeta() == "Banco1" || cliente.getTarjeta() == "Banco2"
+						|| cliente.getTarjeta() == "Banco3") {
+					cliente.getCompras().add(ComprasUtil.hacerCompra(cliente,articulos));
+					System.out.println("realizo una compra con exito");
+				} else
+					System.out.println("el cliente seleccionado no posee una tarjeta valida. Pague al contado");
+				}
+			
 			break;
 
 		case 2:

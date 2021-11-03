@@ -1,25 +1,27 @@
 package ar.edu.unju.escminas.poo.dominio;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
-public abstract class Cliente {
+public abstract class Cliente{
 
 	// variables
 	private int idCliente;
 	private static int auto = 1;
-	private Set<Compra> compras;
+	private List<Compra> compras;
 	private String tarjeta;
 
 	// constructor
 	public Cliente() {
-
 		this.idCliente = auto++;
+		this.setCompras(new ArrayList<Compra>());
 	}
 
-	public Cliente(Set<Compra> compras, String tarjeta) {
+	public Cliente(String tarjeta) {
 		super();
+		this.setCompras(new ArrayList<Compra>());
 		this.idCliente = auto++;
-		this.compras = compras;
 		this.tarjeta = tarjeta;
 	}
 
@@ -32,11 +34,11 @@ public abstract class Cliente {
 		this.idCliente = idCliente;
 	}
 
-	public Set<Compra> getCompras() {
+	public List<Compra> getCompras() {
 		return compras;
 	}
 
-	public void setCompras(Set<Compra> compras) {
+	public void setCompras(List<Compra> compras) {
 		this.compras = compras;
 	}
 

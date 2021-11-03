@@ -2,7 +2,7 @@ package ar.edu.unju.escminas.poo.dominio;
 
 import java.time.LocalDate;
 
-public class Cuota {
+public class Cuota implements Comparable<Cuota> { 
 
 	// variables
 	private float monto;
@@ -53,6 +53,18 @@ public class Cuota {
 		/*
 		 * ", diaPagado=" + diaPagado +
 		 */ "]";
+	}
+
+	@Override
+	public int compareTo(Cuota o) {
+		
+		if(this.vencimiento.compareTo(o.getVencimiento()) < 0) {
+			return -1;
+		}else if(this.vencimiento.compareTo(o.getVencimiento()) > 0)  {
+			return 1;
+		}else {
+			return 0;
+		}
 	}
 
 }
