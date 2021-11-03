@@ -12,19 +12,15 @@ public class Principal {
 
 		TablaClientes tablaClientes = new TablaClientes();
 		TablaArticulos tablaArticulos = new TablaArticulos();
-		MenuPrincipal menuprincipalUtil = new MenuPrincipal();
-		
-		TablaClientesUtil tablaClientesUtil = new TablaClientesUtil();
-		tablaClientes.setClientes(tablaClientesUtil.cargarClientes());
-		
-		TablaArticulosUtil tablaArticulosUtil = new TablaArticulosUtil();
-		tablaArticulos.setArticulos(tablaArticulosUtil.cargarArticulos());
-		
+
+		tablaClientes.setClientes(TablaClientesUtil.cargarClientes());
+
+		tablaArticulos.setArticulos(TablaArticulosUtil.cargarArticulos());
+
 		int opcion = 0;
 
 		do {
-			menuprincipalUtil.menu(opcion, tablaClientes, tablaArticulos);
-
+			opcion = MenuPrincipal.menu(opcion, tablaClientes, tablaArticulos);
 		} while (opcion != 7);
 	}
 

@@ -1,10 +1,8 @@
 package ar.edu.unju.escminas.poo.dominio;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
-public abstract class Cliente{
+public abstract class Cliente {
 
 	// variables
 	private int idCliente;
@@ -15,12 +13,10 @@ public abstract class Cliente{
 	// constructor
 	public Cliente() {
 		this.idCliente = auto++;
-		this.setCompras(new ArrayList<Compra>());
 	}
 
 	public Cliente(String tarjeta) {
 		super();
-		this.setCompras(new ArrayList<Compra>());
 		this.idCliente = auto++;
 		this.tarjeta = tarjeta;
 	}

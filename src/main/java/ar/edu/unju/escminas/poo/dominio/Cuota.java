@@ -2,7 +2,7 @@ package ar.edu.unju.escminas.poo.dominio;
 
 import java.time.LocalDate;
 
-public class Cuota implements Comparable<Cuota> { 
+public class Cuota implements Comparable<Cuota> {
 
 	// variables
 	private float monto;
@@ -49,20 +49,17 @@ public class Cuota implements Comparable<Cuota> {
 	// metodo toString
 	@Override
 	public String toString() {
-		return "Cuota [monto=" + monto + ", vencimiento=" + vencimiento +
-		/*
-		 * ", diaPagado=" + diaPagado +
-		 */ "]";
+		return "Cuota [monto=" + monto + ", vencimiento=" + vencimiento + ", diaPagado=" + diaPagado + "]";
 	}
 
 	@Override
 	public int compareTo(Cuota o) {
-		
-		if(this.vencimiento.compareTo(o.getVencimiento()) < 0) {
+
+		if (this.vencimiento.compareTo(o.getVencimiento()) < 0) {
 			return -1;
-		}else if(this.vencimiento.compareTo(o.getVencimiento()) > 0)  {
+		} else if (this.vencimiento.compareTo(o.getVencimiento()) > 0) {
 			return 1;
-		}else {
+		} else {
 			return 0;
 		}
 	}
