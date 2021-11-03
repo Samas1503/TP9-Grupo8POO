@@ -1,8 +1,6 @@
 package ar.edu.unju.escminas.poo.dominio;
 
-import java.util.Set;
-
-public class Empresa extends Cliente{
+public class Empresa extends Cliente {
 
 	// variables
 	private String nombre;
@@ -13,7 +11,7 @@ public class Empresa extends Cliente{
 
 	}
 
-	public Empresa( String tarjeta, String nombre, String representante) {
+	public Empresa(String tarjeta, String nombre, String representante) {
 		super(tarjeta);
 		this.nombre = nombre;
 		this.representante = representante;
@@ -43,6 +41,5 @@ public class Empresa extends Cliente{
 		return "Empresa [idCliente=" + this.getIdCliente() + ", representante=" + representante + ", nombre=" + nombre
 				+ ", tarjeta=" + this.getTarjeta() + "]";
 	}
-
 
 }

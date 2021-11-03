@@ -70,7 +70,6 @@ public class ComprasUtil {
 			// cantidad de cuotas
 			n = 12;
 		}
-		;
 
 		for (int i = 1; i <= n; i++) {
 			Cuota nuevaCuota = new Cuota(precioTotal / n, vencimiento.plusMonths(i));
